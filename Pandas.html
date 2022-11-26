@@ -1,0 +1,826 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WBYZ | WBYZ</title><meta name="author" content="WBYZ"><meta name="copyright" content="WBYZ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第一章 预备知识Python基础列表推导式1利用列表推导式进行写法上的简化：[* for i in *]。其中，第一个*为映射函数，其输入为后面i指代的内容，第二个*表示迭代的对象。  列表推导式也可以多层嵌套 两种嵌套 1.单个推导式中存在多个迭代 靠前的为外层循环，靠后的为内层循环 2.推导式中嵌套新的推导式 外层推导式内的循环为外层循环，内层推导式内的为内层循环 条件赋值1带有if选择的条件">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WBYZ">
+<meta property="og:url" content="http://example.com/Pandas.html">
+<meta property="og:site_name" content="WBYZ">
+<meta property="og:description" content="第一章 预备知识Python基础列表推导式1利用列表推导式进行写法上的简化：[* for i in *]。其中，第一个*为映射函数，其输入为后面i指代的内容，第二个*表示迭代的对象。  列表推导式也可以多层嵌套 两种嵌套 1.单个推导式中存在多个迭代 靠前的为外层循环，靠后的为内层循环 2.推导式中嵌套新的推导式 外层推导式内的循环为外层循环，内层推导式内的为内层循环 条件赋值1带有if选择的条件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2022-10-05T07:48:50.508Z">
+<meta property="article:modified_time" content="2022-09-21T11:36:02.640Z">
+<meta property="article:author" content="WBYZ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/Pandas"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-09-21 19:36:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a></div></div></div><hr/></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">WBYZ</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">WBYZ</h1></div></header><main class="layout" id="content-inner"><div id="page"><div id="article-container"><h1 id="第一章-预备知识"><a href="#第一章-预备知识" class="headerlink" title="第一章 预备知识"></a>第一章 预备知识</h1><h1 id="Python基础"><a href="#Python基础" class="headerlink" title="Python基础"></a>Python基础</h1><h2 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">利用列表推导式进行写法上的简化：[* <span class="keyword">for</span> i <span class="keyword">in</span> *]。其中，第一个*为映射函数，其输入为后面i指代的内容，第二个*表示迭代的对象。</span><br></pre></td></tr></table></figure>
+
+<p>列表推导式也可以多层嵌套</p>
+<p>两种嵌套</p>
+<p>1.单个推导式中存在多个迭代</p>
+<p>靠前的为外层循环，靠后的为内层循环</p>
+<p>2.推导式中嵌套新的推导式</p>
+<p>外层推导式内的循环为外层循环，内层推导式内的为内层循环</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h3 id="条件赋值"><a href="#条件赋值" class="headerlink" title="条件赋值"></a>条件赋值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">带有<span class="keyword">if</span>选择的条件赋值，其形式为value = a <span class="keyword">if</span> condition <span class="keyword">else</span> b：</span><br></pre></td></tr></table></figure>
+
+<h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><p>利用<strong>lambda</strong>关键字创建的，被用于体现某种映射关系的函数，与def定义的函数没有本质区别</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function =  <span class="keyword">lambda</span> a,b : a*b</span><br></pre></td></tr></table></figure>
+
+<p>在匿名函数中只能使用表达式，但可以通过推导式和条件赋值语句来实现循环和判断</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> x : <span class="built_in">sum</span>(i <span class="keyword">if</span> i%<span class="number">2</span> ==<span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> x)&gt;<span class="number">5</span>,my_list)</span><br></pre></td></tr></table></figure>
+
+<h2 id="zip对象和enumerate方法"><a href="#zip对象和enumerate方法" class="headerlink" title="zip对象和enumerate方法"></a>zip对象和enumerate方法</h2><p>对两个列表中对应位置上的元素进行同时操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mid=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">final=[<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line"><span class="keyword">for</span> midsc,finalsc <span class="keyword">in</span> <span class="built_in">zip</span>(mid,final):</span><br><span class="line">	<span class="built_in">print</span>(midsc,finalsc)</span><br></pre></td></tr></table></figure>
+
+<p>对两个列表建立字典映射</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">fruit = [a,b,c,d,e]</span><br><span class="line"><span class="built_in">dict</span>(<span class="built_in">zip</span>(num,fruit)]</span><br></pre></td></tr></table></figure>
+
+<p>zip函数把多个可迭代对象打包成一个元组构成的可迭代对象，返回<code>zip</code>对象，通过tuple和list得到打包结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">fruit = [a,b,c,d,e]</span><br><span class="line">res=<span class="built_in">list</span>(<span class="built_in">zip</span>(num,fruit))</span><br></pre></td></tr></table></figure>
+
+<p>用<code>*</code>和<code>zip</code>联合使用来进行解压操作<code>list(zip(*zipped))</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res = <span class="built_in">list</span>(<span class="built_in">zip</span>(*res))</span><br></pre></td></tr></table></figure>
+
+<p><code>enumerate</code>是一种特殊打包，在迭代时绑定迭代元素的遍历序号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index,value <span class="keyword">in</span> <span class="built_in">enumerate</span>(L2):</span><br><span class="line">	<span class="built_in">print</span>(index,value)</span><br></pre></td></tr></table></figure>
+
+<p>用<code>zip</code>也可以实现<code>enumerate</code>的功能</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index, value <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="built_in">range</span>(<span class="built_in">len</span>(L2)), L2):</span><br><span class="line">    <span class="built_in">print</span>(index, value)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Numpy基础"><a href="#Numpy基础" class="headerlink" title="Numpy基础"></a>Numpy基础</h1><h2 id="np数组的构造"><a href="#np数组的构造" class="headerlink" title="np数组的构造"></a>np数组的构造</h2><p><strong>array()</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="等差数列"><a href="#等差数列" class="headerlink" title="等差数列"></a>等差数列</h3><p>生成数值均匀、间隔数组</p>
+<p><strong>np.linspace</strong>包含终止点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#起始点 终止点 样本个数</span></span><br><span class="line">np.linspace(<span class="number">1</span>,<span class="number">5</span>,<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>np.arange</strong>不包含终止点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#起始点、终止点 步长</span></span><br><span class="line">np.arange(<span class="number">1</span>,<span class="number">5</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#起始点默认为0，步长默认为1，可缺省</span></span><br></pre></td></tr></table></figure>
+
+<p>省略参数的情况会怎么样？</p>
+<h3 id="特殊矩阵"><a href="#特殊矩阵" class="headerlink" title="特殊矩阵"></a>特殊矩阵</h3><p><strong>np.full()</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#各维度大小 数值</span></span><br><span class="line">np.full((<span class="number">2</span>,<span class="number">3</span>),<span class="number">10</span>)</span><br><span class="line"><span class="comment">#各维度大小（元组） 数值（列表）</span></span><br><span class="line"><span class="comment">#下例中，np_input大小为d2*d3=3*2,布局维度为d0*d1=2*2</span></span><br><span class="line">np=[[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>]]</span><br><span class="line">np.full((<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>),np_input)</span><br></pre></td></tr></table></figure>
+
+<p>**np.zeros()<strong>和</strong>np.ones()**为np.full()的特例</p>
+<p><strong>生成和给定数组相同大小的矩阵</strong>（数组转为矩阵</p>
+<p><strong>np.zero_like()   np.ones_like()   np.full_like()</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">arr -= ([<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">np.zeros_like(array)</span><br><span class="line">np.ones_like(array)</span><br><span class="line">np.zeros_like(array)</span><br><span class="line">np.full_like(arr)</span><br><span class="line">np.full_like(arr,[<span class="number">100</span>,<span class="number">200</span>])</span><br></pre></td></tr></table></figure>
+
+<p><strong>单位矩阵</strong></p>
+<p><strong>np.eye()</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#x代表维数，y代表主对角线的偏移距离</span></span><br><span class="line">np.eye(x,k=y)</span><br></pre></td></tr></table></figure>
+
+<p><strong>空数组</strong></p>
+<p><strong>empty(shape,dtype)</strong> shape为整数或元组</p>
+<p><strong>empty_like(arr,dtype)</strong> array为数组</p>
+<h3 id="随机数组-np-random"><a href="#随机数组-np-random" class="headerlink" title="随机数组 np.random"></a>随机数组 np.random</h3><p><strong>np.random.uniform(a,b,dim)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成服从U[a,b]，维度为dim的均匀分布的数组</span></span><br><span class="line"><span class="comment">#一维</span></span><br><span class="line">np.random.uniform(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)   </span><br><span class="line"><span class="comment">#二维</span></span><br><span class="line">np.random.uniform(<span class="number">1</span>,<span class="number">2</span>,(<span class="number">3</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><strong>np.random.rand(dim)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成服从U[0,1]，相应维度维数为d的均匀分布的数组</span></span><br><span class="line"><span class="comment">#一维</span></span><br><span class="line">np.random.rand(<span class="number">3</span>)</span><br><span class="line"><span class="comment">#二维</span></span><br><span class="line">np.random.rand(<span class="number">3</span>，<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>np.random.normal(mu,sigma,dim)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成服从U[mu,sigma]，相应维度维数为d的正态分布的数组</span></span><br><span class="line"><span class="comment">#一维</span></span><br><span class="line">np.random.normal(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)   </span><br><span class="line"><span class="comment">#二维</span></span><br><span class="line">np.random.normal(<span class="number">1</span>,<span class="number">2</span>,(<span class="number">3</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><strong>np.random.randn(dim)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成服从U[0,1]，维度为c的正态分布的数组</span></span><br><span class="line"><span class="comment">#一维</span></span><br><span class="line">np.random.randn(<span class="number">3</span>)   </span><br><span class="line"><span class="comment">#二维</span></span><br><span class="line">np.random.randn((<span class="number">3</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><strong>np.random.randint(a,b,dim)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成服从U[a,b]，维度为dim的在给定范围内呈离散分布的数组</span></span><br><span class="line"><span class="comment">#一维</span></span><br><span class="line">np.random.randint(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)   </span><br><span class="line"><span class="comment">#二维</span></span><br><span class="line">np.random.randint1,<span class="number">2</span>,(<span class="number">3</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><strong>np.random.choice()</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在my_list中，replace放回地抽取num_of_selection，每个元素被抽取的概率为prob</span></span><br><span class="line">np.random.choice(my_list,num,replace=<span class="literal">True</span>/<span class="literal">False</span>,num_of_selection,prob) </span><br></pre></td></tr></table></figure>
+
+<p><strong>np.random.permutation()</strong></p>
+<p>原列表元素重新排列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#np.random.choice(my_list,num,replace=False,len(my_list),prob) </span></span><br><span class="line"><span class="comment">#一维</span></span><br><span class="line">np.random.permutation(my_list)</span><br></pre></td></tr></table></figure>
+
+<p><strong>随机种子</strong></p>
+<p>能够固定随机数的输出结果，传入固定随机种子的做法在有随机性的算法模型中很常见</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.random.seed(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Numpy数组的变形"><a href="#Numpy数组的变形" class="headerlink" title="Numpy数组的变形"></a>Numpy数组的变形</h2><ol>
+<li>数组中<strong>元素组织方式</strong>的变化导致的变形</li>
+<li>由多个数组<strong>合并</strong>或单个数组<strong>拆分</strong>时产生的维度变化导致的变形</li>
+<li>对数组元素按照给定的次数进行<strong>重复</strong>导致的变形</li>
+</ol>
+<h3 id="由元素组织方式导致的变形"><a href="#由元素组织方式导致的变形" class="headerlink" title="由元素组织方式导致的变形"></a>由元素组织方式导致的变形</h3><h4 id="维度交换方法"><a href="#维度交换方法" class="headerlink" title="维度交换方法"></a>维度交换方法</h4><p><strong>transpose()</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">carbon = np.random.rand(<span class="number">360</span>,<span class="number">180</span>,<span class="number">3</span>)</span><br><span class="line">res = carbon.transpose(<span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>)		<span class="comment">#此处将最后一个维度前置，其他维度后移</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>T操作</strong></p>
+<p>可以看做一种特殊的tranpose(),  把原来数组维度倒置，如原本0&#x2F;1&#x2F;2 , 变为2&#x2F;1&#x2F;0;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res = carbon.T <span class="comment"># 等价于carbon.transpose(2,1,0)</span></span><br></pre></td></tr></table></figure>
+
+<p>当数组为2维时，效果等同于矩阵的转置</p>
+<p><strong>np.swapaxes(arr,a,b)</strong></p>
+<p>当数组arr维数较大，可以用来交换a,b维度</p>
+<h4 id="维度变换方法"><a href="#维度变换方法" class="headerlink" title="维度变换方法"></a>维度变换方法</h4><p><strong>reshape()</strong></p>
+<p>直接重构数组的维度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">my_matrix = np.arange(<span class="number">8</span>)</span><br><span class="line">my_matrix.reshape((<span class="number">2</span>,<span class="number">4</span>),order = <span class="string">&quot;C&quot;</span>)</span><br><span class="line"><span class="comment">#或者</span></span><br><span class="line">my_matrix.reshape((<span class="number">2</span>,<span class="number">4</span>),order = <span class="string">&quot;F&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参数<strong>order</strong> </p>
+<p>控制数组写入和读取的顺序</p>
+<p>可以指定为“C”或“F”，代表两种数组风格，默认为“C”</p>
+<p>“C”,C数组风格，以内层优先的顺序填入</p>
+<p>“F”,Fortran数组风格，以外层优先的顺序填入</p>
+<p>reshape()允许有一个维度存在空缺，只需填充-1，因为被调用数组的大小是确定的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_matrix.reshape(<span class="number">2</span>,<span class="number">2</span>,-<span class="number">1</span>) <span class="comment">#数组大小为8</span></span><br></pre></td></tr></table></figure>
+
+<p>但是必须保证能够整除，下例即为错误示范</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my_matrix.reshape(<span class="number">2</span>,<span class="number">3</span>,-<span class="number">1</span>) <span class="comment">#数组大小为8</span></span><br><span class="line"><span class="comment">#显然不能够整除，会报错</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>expand_dims()</strong></p>
+<p>人为插入维度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">target = np.ones((<span class="number">2</span>,<span class="number">2</span>))</span><br><span class="line">expanded_tardet = np.expand_dims(target,(<span class="number">0</span>,<span class="number">2</span>))<span class="comment">#在第1/3维度插入</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>squeeze()</strong></p>
+<p>人为挤压维度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.squeeze(expanded_target,(<span class="number">0</span>,<span class="number">2</span>))<span class="comment">#在第1/3维度压缩</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="由合并和拆分导致的变形"><a href="#由合并和拆分导致的变形" class="headerlink" title="由合并和拆分导致的变形"></a>由合并和拆分导致的变形</h3><p>参数<strong>axis</strong>：</p>
+<p>数组操作的维数</p>
+<h4 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h4><p><strong>concatenate()</strong></p>
+<p>同质性拼接</p>
+<p>在某一个维度上连接多个数组，不产生新的维度</p>
+<p>只需在非拼接的维度上一致</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pop_1_6 = np.random.rand(<span class="number">20</span>,<span class="number">6</span>,<span class="number">3</span>)</span><br><span class="line">pop_7_12 = np.random.rand(<span class="number">20</span>,<span class="number">6</span>,<span class="number">3</span>)</span><br><span class="line">res = np.concatenate([pop_1_6,pop_7_12],axis=<span class="number">1</span>) </span><br><span class="line">res.shape</span><br><span class="line"><span class="comment">#res = (20,12,3)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>stack()</strong></p>
+<p>异质性拼接</p>
+<p>在某一个维度上连接多个数组，产生新的维度</p>
+<p>被拼接数组维度必须完全一致</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pop_man = np.random.rand(<span class="number">20</span>,<span class="number">6</span>,<span class="number">3</span>)</span><br><span class="line">pop_woman = np.random.rand(<span class="number">20</span>,<span class="number">6</span>,<span class="number">3</span>)</span><br><span class="line">res = np.stack([pop_man,pop_woman],axis=<span class="number">2</span>) </span><br><span class="line">res.shape</span><br><span class="line"><span class="comment">#res = (20,6,2,3)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="拆分"><a href="#拆分" class="headerlink" title="拆分"></a>拆分</h4><p><strong>split()</strong></p>
+<p>在指定维度上对数组进行分割，返回分割后Numpy数组的列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pop_1_6 = np.random.rand(<span class="number">20</span>,<span class="number">6</span>,<span class="number">3</span>)</span><br><span class="line">res = np.split(pop_1_6,indices_or_sections=<span class="number">3</span>,axis=<span class="number">1</span>)<span class="comment">#均等分割为3份</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> res:</span><br><span class="line">    <span class="built_in">print</span>(i.shape)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">(20,2,3)</span></span><br><span class="line"><span class="string">(20,2,3)</span></span><br><span class="line"><span class="string">(20,2,3)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">res = np.split(pop_1_6,indices_or_sections=[<span class="number">1</span>,<span class="number">4</span>],axis=<span class="number">1</span>)<span class="comment">#从指定分割点序列分割</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> res:</span><br><span class="line">    <span class="built_in">print</span>(i.shape)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">(20,1,3)</span></span><br><span class="line"><span class="string">(20,3,3)</span></span><br><span class="line"><span class="string">(20,2,3)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>参数<strong>indices_or_sections</strong></p>
+<p>为整数时，表示对某一维度的维数进行均匀分割；为列表时且被分割数组为一维序列时，代表分割点</p>
+<p>split()函数更类似于concatenate()的逆操作，首先stack必须由多个尺寸相同的数组来拼接，新产生的维度大小取决于拼接数组的数量，而concatenate的被拼接数组在拼接维度上可以不一致且不会产生新维度。</p>
+<h3 id="对数组元素按照给定的次数进行重复导致的变形"><a href="#对数组元素按照给定的次数进行重复导致的变形" class="headerlink" title="对数组元素按照给定的次数进行重复导致的变形"></a>对数组元素按照给定的次数进行重复导致的变形</h3><p><strong>repeat()</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">3</span>)</span><br><span class="line">np.repeat(a,repeats = a+<span class="number">1</span>)<span class="comment">#第a个元素重复a遍</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.arrange([<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">np.repeat(a,repeats = [<span class="number">1</span>,<span class="number">2</span>],axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Q:请使用repeat函数分别构造两个10×10的数组，第一个数组要求第i行的元素值都为i，第二个数组要求第i列的元素值都为i。</p>
+<p>A:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr = np.arange(<span class="number">1</span>, <span class="number">11</span>)</span><br><span class="line">rep_1 = np.repeat(arr[:, <span class="literal">None</span>], <span class="number">10</span>, <span class="number">1</span>)</span><br><span class="line">rep_2 = np.repeat(arr[<span class="literal">None</span>, :], <span class="number">10</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Numpy数组的切片"><a href="#Numpy数组的切片" class="headerlink" title="Numpy数组的切片"></a>Numpy数组的切片</h2><h3 id="利用-传入slice对象"><a href="#利用-传入slice对象" class="headerlink" title="利用[]传入slice对象"></a>利用[]传入slice对象</h3><p>利用[]在相应维度传入slice(p,q,r)对象，不包含q</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">target = np.arange(<span class="number">24</span>).reshape(<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">target[<span class="number">0</span>:<span class="number">3</span>,:,<span class="number">1</span>:<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当[]对应维度的输入值都是长度相同的列表，此时的输入值代表元素在各个维度的索引值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">target = np.arange(<span class="number">24</span>).reshape(<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">target[[<span class="number">0</span>,<span class="number">1</span>],[<span class="number">0</span>,<span class="number">1</span>],[<span class="number">0</span>,<span class="number">1</span>]] <span class="comment">#索引[0,0,0]和[1,1,1]</span></span><br><span class="line"><span class="comment">#array([0,10])</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="利用布尔数组"><a href="#利用布尔数组" class="headerlink" title="利用布尔数组"></a>利用布尔数组</h3><p>保留某一个维度的若干维数，只需传入相应位置为True，其余位置为False的布尔数组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">target = np.arange(<span class="number">24</span>).reshape(<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">target[[<span class="literal">True</span>,<span class="literal">False</span>,<span class="literal">True</span>,<span class="literal">False</span>],:,:]</span><br><span class="line"></span><br><span class="line">target[[<span class="literal">True</span>,<span class="literal">False</span>,<span class="literal">True</span>,<span class="literal">False</span>]]		<span class="comment">#连续出现在最后几个维度的全体切片&quot;:&quot;可以省略</span></span><br><span class="line">target[...,<span class="number">0</span>::<span class="number">2</span>] == target[:,:,<span class="number">0</span>::<span class="number">2</span>]<span class="comment">#连续出现在最初几个维度的全体切片&quot;:&quot;，可以用...简写</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="np-newaxis"><a href="#np-newaxis" class="headerlink" title="np.newaxis"></a>np.newaxis</h3><p>newaxis结合切片可以完成与expan_dims()类似的操作</p>
+<p>本质就是Python中的None</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">target = np.arange(<span class="number">24</span>).reshape(<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">target[:,np.newaxis,np.newaxis,:,:].shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="广播机制"><a href="#广播机制" class="headerlink" title="广播机制"></a>广播机制</h2><p>广播机制用于处理两个不同维度数组之间的操作，这里只讨论不超过两维的数组广播机制。</p>
+<h3 id="【a】标量和数组的操作"><a href="#【a】标量和数组的操作" class="headerlink" title="【a】标量和数组的操作"></a>【a】标量和数组的操作</h3><p>当一个标量和数组进行运算时，标量会自动把大小扩充为数组大小，之后进行逐元素操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">In [110]: res = 3 * np.ones((2,2)) + 1</span><br><span class="line"></span><br><span class="line">In [111]: res</span><br><span class="line">Out[111]: </span><br><span class="line">array([[4., 4.],</span><br><span class="line">       [4., 4.]])</span><br><span class="line"></span><br><span class="line">In [112]: res = 1 / res</span><br><span class="line"></span><br><span class="line">In [113]: res</span><br><span class="line">Out[113]: </span><br><span class="line">array([[0.25, 0.25],</span><br><span class="line">       [0.25, 0.25]])</span><br></pre></td></tr></table></figure>
+
+<h3 id="【b】二维数组之间的操作"><a href="#【b】二维数组之间的操作" class="headerlink" title="【b】二维数组之间的操作"></a>【b】二维数组之间的操作</h3><p>当两个数组维度完全一致时，使用对应元素的操作，否则会报错，除非其中的某个数组的维度是 m×1 或者 1×n ，那么会扩充其具有 1 的维度为另一个数组对应维度的大小。例如， 1×2 数组和 3×2 数组做逐元素运算时会把第一个数组扩充为 3×2 ，扩充时的对应数值进行赋值。但是，需要注意的是，如果第一个数组的维度是 1×3 ，那么由于在第二维上的大小不匹配且不为 1 ，此时报错。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">In [114]: res = np.ones((3,2))</span><br><span class="line"></span><br><span class="line">In [115]: res</span><br><span class="line">Out[115]: </span><br><span class="line">array([[1., 1.],</span><br><span class="line">       [1., 1.],</span><br><span class="line">       [1., 1.]])</span><br><span class="line"></span><br><span class="line">In [116]: res * np.array([[2,3]]) # 第二个数组扩充第一维度为3</span><br><span class="line">Out[116]: </span><br><span class="line">array([[2., 3.],</span><br><span class="line">       [2., 3.],</span><br><span class="line">       [2., 3.]])</span><br><span class="line"></span><br><span class="line">In [117]: res * np.array([[2],[3],[4]]) # 第二个数组扩充第二维度为2</span><br><span class="line">Out[117]: </span><br><span class="line">array([[2., 2.],</span><br><span class="line">       [3., 3.],</span><br><span class="line">       [4., 4.]])</span><br><span class="line"></span><br><span class="line">In [118]: res * np.array([[2]]) # 等价于两次扩充，第二个数组两个维度分别扩充为3和2</span><br><span class="line">Out[118]: </span><br><span class="line">array([[2., 2.],</span><br><span class="line">       [2., 2.],</span><br><span class="line">       [2., 2.]])</span><br></pre></td></tr></table></figure>
+
+<h3 id="【c】一维数组与二维数组的操作"><a href="#【c】一维数组与二维数组的操作" class="headerlink" title="【c】一维数组与二维数组的操作"></a>【c】一维数组与二维数组的操作</h3><p>当一维数组 Ak 与二维数组 Bm,n 操作时，等价于把一维数组视作 A1,k 的二维数组，使用的广播法则与【b】中一致，当 k!&#x3D;n 且 k,n 都不是 1 时报错。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">In [119]: np.ones(3) + np.ones((2,3))</span><br><span class="line">Out[119]: </span><br><span class="line">array([[2., 2., 2.],</span><br><span class="line">       [2., 2., 2.]])</span><br><span class="line"></span><br><span class="line">In [120]: np.ones(3) + np.ones((2,1))</span><br><span class="line">Out[120]: </span><br><span class="line">array([[2., 2., 2.],</span><br><span class="line">       [2., 2., 2.]])</span><br><span class="line"></span><br><span class="line">In [121]: np.ones(1) + np.ones((2,3))</span><br><span class="line">Out[121]: </span><br><span class="line">array([[2., 2., 2.],</span><br><span class="line">       [2., 2., 2.]])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><h3 id="计算函数"><a href="#计算函数" class="headerlink" title="计算函数"></a>计算函数</h3><h4 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h4><p>聚合函数：把一个序列或数组聚合为一个标量结果</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>max()</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min()</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>mean()</td>
+<td>平均值</td>
+</tr>
+<tr>
+<td>median()</td>
+<td>中位数</td>
+</tr>
+<tr>
+<td>std()</td>
+<td>标准差</td>
+</tr>
+<tr>
+<td>var()</td>
+<td>方差</td>
+</tr>
+<tr>
+<td>sum()</td>
+<td>总和</td>
+</tr>
+<tr>
+<td>quantile()</td>
+<td>分位数</td>
+</tr>
+<tr>
+<td>cov()</td>
+<td>计算相关性</td>
+</tr>
+<tr>
+<td>corrcoef()</td>
+<td>计算相关性</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">matrix = np.random.rand(<span class="number">20</span>,<span class="number">40</span>,<span class="number">24</span>).reshape(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">matrix.<span class="built_in">sum</span>(axis=<span class="number">1</span>,<span class="number">2</span>)		<span class="comment">#聚合1,2维度，只考虑0维</span></span><br><span class="line"><span class="comment">#聚合哪一维度，即忽略哪一维度</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>median &amp; quantile()</strong></p>
+<p>只能通过np.median &amp; np.quantile()来调用，不能直接通过数组调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">matrix = np.random.rand(<span class="number">20</span>,<span class="number">40</span>,<span class="number">24</span>).reshape(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">np.quantile(matrix,axis=-<span class="number">1</span>,q=<span class="number">0.5</span>)</span><br><span class="line">np.median(matrix,axis=-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>nan开头的聚合函数</strong></p>
+<p>如果在数组聚合的维度具有缺失值，可以使用nan开头的函数来忽略缺失值来进行计算</p>
+<h4 id="ufunc函数（Universal-Functions"><a href="#ufunc函数（Universal-Functions" class="headerlink" title="ufunc函数（Universal Functions)"></a>ufunc函数（Universal Functions)</h4><p>ufunc函数：对数组中每一个元素进行数学运算，而不是将多个值聚合为一个数字</p>
+<p>sin , cos , tan , arccos , arcsin , arctan , abs , sqrt , power , exp , log , log10 , log2 , ceil ,floor</p>
+<h3 id="逻辑函数"><a href="#逻辑函数" class="headerlink" title="逻辑函数"></a>逻辑函数</h3><p>生成逻辑数组的常见方式</p>
+<ol>
+<li>比较运算符 ， ‘&lt;’ ‘&gt;’ ‘&#x3D;&#x3D;’ ‘&lt;’ ‘!&#x3D;’ ‘&lt;&#x3D;’ ‘&gt;&#x3D;’</li>
+<li>内置函数，isnan(),isinf() ,any(), all()</li>
+<li>逻辑运算符，’|’ ‘&amp;’ ‘~’</li>
+</ol>
+<p>where函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where(bool_array , if_true, if_false)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="索引函数"><a href="#索引函数" class="headerlink" title="索引函数"></a>索引函数</h3><p>返回值为索引的函数</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nonzero()</td>
+<td>返回非零数的索引</td>
+</tr>
+<tr>
+<td>argmax()</td>
+<td>返回最大数的索引</td>
+</tr>
+<tr>
+<td>argmin()</td>
+<td>返回最小数的索引</td>
+</tr>
+</tbody></table>
+<h1 id="第二章-Pandas基础"><a href="#第二章-Pandas基础" class="headerlink" title="第二章 Pandas基础"></a>第二章 Pandas基础</h1><h1 id="文件读取和写入"><a href="#文件读取和写入" class="headerlink" title="文件读取和写入"></a>文件读取和写入</h1><p>依赖<strong>xlrd</strong>  <strong>xlwt</strong>  <strong>openpyxl</strong>这3个库</p>
+<h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2><h3 id="常用函数-1"><a href="#常用函数-1" class="headerlink" title="常用函数"></a>常用函数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>文件格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>read_csv()</td>
+<td>csv</td>
+</tr>
+<tr>
+<td>read_table()</td>
+<td>txt</td>
+</tr>
+<tr>
+<td>read_excel()</td>
+<td>excel</td>
+</tr>
+</tbody></table>
+<h3 id="公共参数"><a href="#公共参数" class="headerlink" title="公共参数"></a>公共参数</h3><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>header</td>
+<td>设置为’None’表示第一行不作为列名</td>
+</tr>
+<tr>
+<td>index_col</td>
+<td>把某一列或某几列作为索引</td>
+</tr>
+<tr>
+<td>usecols</td>
+<td>表示读取列的集合，默认读取所有列</td>
+</tr>
+<tr>
+<td>parse_dates</td>
+<td>表示需要转化为时间的列</td>
+</tr>
+<tr>
+<td>nrows</td>
+<td>表示读取的数据行数</td>
+</tr>
+<tr>
+<td>sep</td>
+<td>(适用txt)自定义分割符号</td>
+</tr>
+</tbody></table>
+<h2 id="数据写入"><a href="#数据写入" class="headerlink" title="数据写入"></a>数据写入</h2><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>to_csv()</td>
+<td>转化为csv格式</td>
+</tr>
+<tr>
+<td>to_markdown()</td>
+<td>（需要tabulate)转化为md格式</td>
+</tr>
+<tr>
+<td>to_latex()</td>
+<td>（需要tabulate)转化为latex格式</td>
+</tr>
+</tbody></table>
+<p>参数<strong>index</strong></p>
+<p>index &#x3D; True&#x2F;False</p>
+<p>控制pandas在数据写入是是否需要索引</p>
+<h1 id="基本数据结构"><a href="#基本数据结构" class="headerlink" title="基本数据结构"></a>基本数据结构</h1><p>两种基本的数据结构</p>
+<p><strong>一维的 Series</strong>  &amp;  <strong>二维的 DataFrame</strong></p>
+<h2 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h2><h3 id="4个组成部分"><a href="#4个组成部分" class="headerlink" title="4个组成部分"></a>4个组成部分</h3><ol>
+<li>data 序列的值</li>
+<li>index 索引</li>
+<li>dtype 存储类型</li>
+<li>name 序列名称</li>
+</ol>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ol>
+<li>‘.’来获得属性</li>
+<li>‘.shape’来获得序列的长度</li>
+<li>[index_item]来取出单个索引对应的值</li>
+</ol>
+<h2 id="DateFrame"><a href="#DateFrame" class="headerlink" title="DateFrame"></a>DateFrame</h2><p>在Series 的基础上增加了<strong>列索引</strong></p>
+<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><ol>
+<li>由二维的data与行列索引来构造</li>
+<li>从列索引名到数据的映射来构造，再加上行索引</li>
+</ol>
+<h3 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h3><ol>
+<li>‘.’取出相应的属性</li>
+<li>‘.T’进行转置</li>
+<li>df[col_name]修改或新增一列</li>
+<li>drop删除某一行&#x2F;列</li>
+</ol>
+<h1 id="常用基本函数"><a href="#常用基本函数" class="headerlink" title="常用基本函数"></a>常用基本函数</h1><h2 id="汇总函数"><a href="#汇总函数" class="headerlink" title="汇总函数"></a>汇总函数</h2><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>head()</td>
+<td>返回表的前n行，n默认为5</td>
+</tr>
+<tr>
+<td>tail()</td>
+<td>返回表的后n行，n默认为5</td>
+</tr>
+<tr>
+<td>info()</td>
+<td>返回表的信息概况</td>
+</tr>
+<tr>
+<td>describe()</td>
+<td>返回表中数值列对应的主要统计量</td>
+</tr>
+</tbody></table>
+<p>在列较多的情况下，可以使用pandas-profiling</p>
+<h2 id="特征统计函数"><a href="#特征统计函数" class="headerlink" title="特征统计函数"></a>特征统计函数</h2><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>max()</td>
+<td></td>
+</tr>
+<tr>
+<td>mean()</td>
+<td></td>
+</tr>
+<tr>
+<td>median()</td>
+<td></td>
+</tr>
+<tr>
+<td>std()</td>
+<td></td>
+</tr>
+<tr>
+<td>sum()</td>
+<td></td>
+</tr>
+<tr>
+<td>quatile()</td>
+<td>返回分位数</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>返回非缺失值个数</td>
+</tr>
+<tr>
+<td>idxmax()</td>
+<td>返回最大值对应的索引</td>
+</tr>
+</tbody></table>
+<p>返回特征值</p>
+<h2 id="频次函数"><a href="#频次函数" class="headerlink" title="频次函数"></a>频次函数</h2><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unique()</td>
+<td>返回由唯一值组成的列表</td>
+</tr>
+<tr>
+<td>nunique()</td>
+<td>返回唯一值的个数</td>
+</tr>
+<tr>
+<td>value_counts(normalize&#x3D;Ture&#x2F;False)</td>
+<td>得到序列中每个值出现的次数，normalize为True时进行归一化处理</td>
+</tr>
+<tr>
+<td>drop_duplicates(keep&#x3D;first&#x2F;last&#x2F;False)</td>
+<td>观察多个列所在的唯一值，first保留每个组合初次出现所在行，last最后出现所在行，False只保留标签出现过一次的行</td>
+</tr>
+<tr>
+<td>duplicated(keep&#x3D;first&#x2F;last&#x2F;False))</td>
+<td>返回元素是否为唯一值的布尔列表，将重复元素设为’True’，反之为’False’</td>
+</tr>
+</tbody></table>
+<p>处理唯一值</p>
+<h2 id="替换函数"><a href="#替换函数" class="headerlink" title="替换函数"></a>替换函数</h2><h3 id="映射替换"><a href="#映射替换" class="headerlink" title="映射替换"></a>映射替换</h3><p>包含replace(), str.replace(), cat.codes()</p>
+<p><strong>replace()</strong></p>
+<p>通过字典构造</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;Gender&#x27;</span>].replace(&#123;<span class="string">&#x27;Female&#x27;</span>:<span class="number">0</span>,<span class="string">&#x27;Male&#x27;</span>:<span class="number">1</span>&#125;).head()</span><br></pre></td></tr></table></figure>
+
+<p>传入两个列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;Gender&#x27;</span>].replace([<span class="string">&#x27;Female&#x27;</span>,<span class="string">&#x27;Male&#x27;</span>],[<span class="number">0</span>,<span class="number">1</span>]).head()</span><br></pre></td></tr></table></figure>
+
+<p>特殊的方向替换（参数<strong>method</strong>）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="string">&#x27;a&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;b&#x27;</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="string">&#x27;a&#x27;</span>])</span><br><span class="line"><span class="comment">#method == ffill</span></span><br><span class="line">s.replace([<span class="number">1</span>,<span class="number">2</span>],method=<span class="string">&#x27;ffill&#x27;</span>)</span><br><span class="line"><span class="comment">#method == bfill</span></span><br><span class="line">s.replace([<span class="number">1</span>,<span class="number">2</span>],method=<span class="string">&#x27;bfill&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="逻辑替换"><a href="#逻辑替换" class="headerlink" title="逻辑替换"></a>逻辑替换</h3><p>包含<strong>where() , mask()</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([-<span class="number">1</span>,<span class="number">1</span>,<span class="number">234</span>,<span class="number">100</span>,-<span class="number">50</span>])</span><br><span class="line"><span class="comment">#where()在传入条件为False对应行进行替换,替换为第二个参数</span></span><br><span class="line">s.where(s&lt;<span class="number">0</span>,<span class="number">100</span>)</span><br><span class="line"><span class="comment">#mask()在传入条件为True对应行进行替换,替换为第二个参数</span></span><br><span class="line">s.mask(s&lt;<span class="number">0</span>,<span class="number">100</span>)</span><br><span class="line"><span class="comment">#第二个参数，默认为NaN（缺失值）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#传入条件为bool序列即可,但其索引应当与被调用的Sereds的索引一致</span></span><br><span class="line">s_condition = pd.Serise([<span class="literal">True</span>,<span class="literal">False</span>,<span class="literal">True</span>,<span class="literal">True</span>],index=s.index)</span><br><span class="line">s.where(s_condition,-<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="数值替换"><a href="#数值替换" class="headerlink" title="数值替换"></a>数值替换</h3><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>round(precision)</td>
+<td>按照精度四舍五入</td>
+</tr>
+<tr>
+<td>abs()</td>
+<td>取绝对值</td>
+</tr>
+<tr>
+<td>clip(low_bound,high_bound)</td>
+<td>截断</td>
+</tr>
+</tbody></table>
+<p><strong>Trick</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将超出范围的值替换为自定义的值</span></span><br><span class="line">small, big = -<span class="number">999</span>, <span class="number">999</span></span><br><span class="line">s.where(s&lt;=<span class="number">3</span>, big).where(s&gt;=<span class="number">1</span>, small)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="排序函数"><a href="#排序函数" class="headerlink" title="排序函数"></a>排序函数</h2><h3 id="值排序函数"><a href="#值排序函数" class="headerlink" title="值排序函数"></a>值排序函数</h3><p><strong>sort_value()</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df_demo.sort_value([<span class="string">&#x27;We&#x27;</span>,<span class="string">&#x27;He&#x27;</span>],ascending=[<span class="literal">True</span>,<span class="literal">False</span>]).head()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参数<strong>ascending</strong></p>
+<table>
+<thead>
+<tr>
+<th>ascending取值</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>True</td>
+<td>升序</td>
+</tr>
+<tr>
+<td>False</td>
+<td>降序</td>
+</tr>
+</tbody></table>
+<h3 id="索引排序函数"><a href="#索引排序函数" class="headerlink" title="索引排序函数"></a>索引排序函数</h3><p><strong>sort_index()</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df_demo.sort_index([<span class="string">&#x27;Weight&#x27;</span>,<span class="string">&#x27;Height&#x27;</span>],ascending=[<span class="literal">True</span>,<span class="literal">False</span>]).head()</span><br></pre></td></tr></table></figure>
+
+<h3 id="序列排名函数"><a href="#序列排名函数" class="headerlink" title="序列排名函数"></a>序列排名函数</h3><p><strong>rank()</strong></p>
+<p>返回每个元素在整个序列的排名</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.rank(ascending=<span class="literal">True</span>,pct=<span class="literal">False</span>,method=method)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参数<strong>pct</strong></p>
+<p>表示是否返回元素对应的分位数</p>
+<p>参数<strong>method</strong></p>
+<p>用于控制元素相等时排名的处理方式</p>
+<table>
+<thead>
+<tr>
+<th>method &#x3D;</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>average</td>
+<td>取均值</td>
+</tr>
+<tr>
+<td>min</td>
+<td>取最小的可能排名</td>
+</tr>
+<tr>
+<td>max</td>
+<td>取最大的可能排名</td>
+</tr>
+<tr>
+<td>first</td>
+<td>按照序列中元素出现的先后顺序排名</td>
+</tr>
+<tr>
+<td>dense</td>
+<td>相邻大小的元素排名差1</td>
+</tr>
+</tbody></table>
+<h2 id="apply-函数"><a href="#apply-函数" class="headerlink" title="apply()函数"></a>apply()函数</h2><p>常用于对DataFrame进行行迭代或列迭代，参数往往是一个以序列输入的函数</p>
+<p>功能很强大，性能很差</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在jupyter 中进行性能的测试，-r代表运行的轮数（runs） -n代表每一轮该代码运行的次数</span></span><br><span class="line">%timeit -n -r</span><br></pre></td></tr></table></figure>
+
+<p>最好不要使用，性能非常差</p>
+<h1 id="窗口"><a href="#窗口" class="headerlink" title="窗口"></a>窗口</h1><p>Pandas中有3类窗口：</p>
+<ol>
+<li>滑动窗口rolling</li>
+<li>扩张窗口expanding</li>
+<li>指数加权窗口ewm</li>
+</ol>
+<h2 id="滑动窗口rolling"><a href="#滑动窗口rolling" class="headerlink" title="滑动窗口rolling"></a>滑动窗口rolling</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#要使用滑窗函数，必须先对一个series使用&#x27;.rolling&#x27;</span></span><br><span class="line">s = pd.Series([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line">roller = s.rolling(window = <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参数<strong>window</strong></p>
+<p>表示窗口的大小，即包含了多少元素</p>
+<p>参数<strong>min_periods</strong></p>
+<p>指定了参与计算的最小样本量，默认为窗口大小</p>
+<p>支持使用apply()传入自定义函数，传入参数是对应窗口的Series</p>
+<p>shift() &#x2F; diff() &#x2F; pct_change()是一组类滑窗函数</p>
+<p>（他们的功能能被窗口大小为n+1的滑窗函数等价替代）</p>
+<p>公共参数为periods&#x3D;n，默认为1</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>shift()</td>
+<td>取向前第n个元素的值</td>
+</tr>
+<tr>
+<td>diff()</td>
+<td>向前第n个元素作差</td>
+</tr>
+<tr>
+<td>pct_change()</td>
+<td>与向前第n个元素相比而计算出增长率</td>
+</tr>
+</tbody></table>
+<h2 id="扩张窗口expanding"><a href="#扩张窗口expanding" class="headerlink" title="扩张窗口expanding"></a>扩张窗口expanding</h2><p>又称累计窗口，本质是一个动态长度窗口</p>
+<p>长度为序列开始处的位置到具体操作处的位置</p>
+<p>其使用的聚合函数会作用于这些逐步扩张的窗口</p>
+<h1 id="第三章-索引"><a href="#第三章-索引" class="headerlink" title="第三章 索引"></a>第三章 索引</h1><h1 id="索引器"><a href="#索引器" class="headerlink" title="索引器"></a>索引器</h1><h2 id="表的列索引"><a href="#表的列索引" class="headerlink" title="表的列索引"></a>表的列索引</h2><p>列索引是最常见的索引形式，一般通过 [] 来实现。通过 [列名] 可以从 DataFrame 中取出相应的列，返回值为 Series </p>
+<p>如果要取出多个列，则可以通过 [列名组成的列表] ，其返回值为一个 DataFrame</p>
+<p>若要取出单列，且列名中不包含空格，则可以用 . 列名 取出，这和 [列名] 是等价的</p>
+<h2 id="序列的行索引"><a href="#序列的行索引" class="headerlink" title="序列的行索引"></a>序列的行索引</h2><h3 id="【a】以字符串为索引的-Series"><a href="#【a】以字符串为索引的-Series" class="headerlink" title="【a】以字符串为索引的 Series"></a>【a】以字符串为索引的 Series</h3><p>如果取出单个索引的对应元素，则可以使用 [item] ，若 Series 只有单个值对应，则返回这个标量值，如果有多个值对应，则返回一个 Series：</p>
+<p>如果取出多个索引的对应元素，则可以使用 [items 的列表]</p>
+<p>如果想要取出某两个索引之间的元素，并且这两个索引是在整个索引中唯一出现，则可以使用切片，同时需要注意这里的切片会包含两个端点：</p>
+<h3 id="【b】以整数为索引的-Series"><a href="#【b】以整数为索引的-Series" class="headerlink" title="【b】以整数为索引的 Series"></a>【b】以整数为索引的 Series</h3><p>在使用数据的读入函数时，如果不特别指定所对应的列作为索引，那么会生成从 0 开始的整数索引作为默认索引。当然，任意一组符合长度要求的整数都可以作为索引；和字符串一样，如果使用 [int] 或 [int_list] ，则可以取出对应索引 元素的值：</p>
+<p>如果使用整数切片，则会取出对应索引位置的值，注意这里的整数切片同 Python 中的切片一样不包含右端点：</p>
+<h2 id="loc索引器"><a href="#loc索引器" class="headerlink" title="loc索引器"></a>loc索引器</h2><p>于表而言，有两种索引器，一种是基于元素的 loc 索引器，另一种是基于位置的 iloc 索引器。</p>
+<p>loc 索引器的一般形式是 loc[ * ,  * ] ，其中第一个 * 代表行的选择，第二个 * 代表列的选择，如果省略第二个位置写作 loc[<em>]，这个 * 是指行的筛选。其中，</em> 的位置一共有五类合法对象，分别是：<strong>单个元素、元素列表、元素切片、布尔列表以及函数</strong></p>
+<h3 id="【a】-为单个元素"><a href="#【a】-为单个元素" class="headerlink" title="【a】* 为单个元素"></a>【a】* 为单个元素</h3><p>直接取出相应的行或列，如果该元素在索引中重复则结果为 DataFrame，否则为 Series </p>
+<p>也可以同时选择行和列</p>
+<h3 id="【b】-为元素列表"><a href="#【b】-为元素列表" class="headerlink" title="【b】* 为元素列表"></a>【b】* 为元素列表</h3><p>取出列表中所有元素值对应的行或列</p>
+<h3 id="【c】-为切片"><a href="#【c】-为切片" class="headerlink" title="【c】* 为切片"></a>【c】* 为切片</h3><p>如果是唯一值的起点和终点字符，那么就可以使用切片，并且包含两个端点，如果不唯一则报错：</p>
+<p>如果 DataFrame 使用整数索引，其使用整数切片的时候和上面字符串索引的要求一致（唯一），都是元素切片，包含端点且起点、终点不允许有重复值</p>
+<h3 id="【d】-为布尔列表"><a href="#【d】-为布尔列表" class="headerlink" title="【d】* 为布尔列表"></a>【d】* 为布尔列表</h3><p>在实际的数据处理中，根据条件来筛选行是极其常见的，此处传入 loc 的布尔列表与 DataFrame 长度相同，且列表为 True 的位置所对应的行会被选中，False 则会被剔除。</p>
+<p>也可以通过 isin 方法返回的布尔列表等价写出</p>
+<p>对于复合条件而言，可以用 |（或）, &amp;（且）, ~（取反） 的组合来实现</p>
+<h3 id="【e】-为函数"><a href="#【e】-为函数" class="headerlink" title="【e】* 为函数"></a>【e】* 为函数</h3><p>这里的函数，必须以前面的四种合法形式之一为返回值，并且函数的输入值为 DataFrame 本身。假设仍然是上述复合条件筛选的例子，可以把逻辑写入一个函数中再返回，需要注意的是函数的形式参数 x 本质上即为 df_demo</p>
+<p>此外，还支持使用 lambda 表达式，其返回值也同样必须是先前提到的四种形式之一</p>
+<p>由于函数无法返回如 start: end: step 的切片形式，故返回切片时要用 slice 对象进行包装</p>
+<p>对于 Series 也可以使用 loc 索引，其遵循的原则与 DataFrame 中用于行筛选的 loc[*]完全一致</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">condition</span>(<span class="params">x</span>):</span><br><span class="line">    condition_1_1 = x.School == <span class="string">&#x27;Fudan University&#x27;</span></span><br><span class="line">    condition_1_2 = x.Grade == <span class="string">&#x27;Senior&#x27;</span></span><br><span class="line">    condition_1_3 = x.Weight &gt; <span class="number">70</span></span><br><span class="line">    condition_1 = condition_1_1 &amp; condition_1_2 &amp; condition_1_3</span><br><span class="line">    condition_2_1 = x.School == <span class="string">&#x27;Peking University&#x27;</span></span><br><span class="line">    condition_2_2 = x.Grade == <span class="string">&#x27;Senior&#x27;</span></span><br><span class="line">    condition_2_3 = x.Weight &gt; <span class="number">80</span></span><br><span class="line">    condition_2 = condition_2_1 &amp; (~condition_2_2) &amp; condition_2_3</span><br><span class="line">    result = condition_1 | condition_2</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">df_demo.loc[condition]</span><br><span class="line"></span><br><span class="line">Out[<span class="number">43</span>]: </span><br><span class="line">                           School     Grade Gender  Weight Transfer</span><br><span class="line">Name                                                               </span><br><span class="line">Qiang Han       Peking University  Freshman   Male    <span class="number">87.0</span>        N</span><br><span class="line">Chengpeng Zhou   Fudan University    Senior   Male    <span class="number">81.0</span>        N</span><br><span class="line">Changpeng Zhao  Peking University  Freshman   Male    <span class="number">83.0</span>        N</span><br><span class="line">Chengpeng Qian   Fudan University    Senior   Male    <span class="number">73.0</span>        Y</span><br></pre></td></tr></table></figure>
+
+<h2 id="iloc索引器"><a href="#iloc索引器" class="headerlink" title="iloc索引器"></a>iloc索引器</h2><p>iloc 的使用与 loc 完全类似，只不过是<strong>针对位置进行筛选</strong>，在相应的 * 位置处一共也有五类合法对象，分别是：整数、整数列表、整数切片、布尔列表以及函数，函数的返回值必须是前面的四类合法对象中的一个，其输入同样也为 DataFrame 本身</p>
+<p>在使用布尔列表的时候要特别注意，不能传入 Series 而必须传入序列的 values ，否则会报错。因此，在使用</p>
+<p>布尔筛选的时候还是应当优先考虑 loc 的方式</p>
+<p>对 Series 而言同样也可以通过 iloc 返回相应位置的值或子序列</p>
+<h2 id="query方法"><a href="#query方法" class="headerlink" title="query方法"></a>query方法</h2><p>在 pandas 中，支持把字符串形式的查询表达式传入 query 方法来查询数据，其表达式的执行结果必须返回布尔列表。在进行复杂索引时，由于这种检索方式无需像普通方法一样重复使用 DataFrame 的名字来引用列名，一般而言会使代码长度在不降低可读性的前提下有所减少。</p>
+<p>在 query 表达式中，帮用户注册了所有来自 DataFrame 的列名，所有属于该 Series 的方法都可以被调用，和正常的函数调用并没有区别</p>
+<p>在 query 中还注册了若干英语的字面用法，帮助提高可读性，例如：or, and, or, is in, not in 。例如，筛选出男生中不是大一大二的学生</p>
+<p>在字符串中出现与列表的比较时，&#x3D;&#x3D; 和 !&#x3D; 分别表示元素出现在列表和没有出现在列表，等价于 isin 和 not in，例如查询所有大三和大四的学生</p>
+<p>对于 query 中的字符串，如果要引用外部变量，只需在变量名前加 @ 符号</p>
+<p>对于含有空格的列名，需要使用 <code>col name</code> 的方式进行引用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df.query(<span class="string">&#x27;((School == &quot;Fudan University&quot;)&amp;&#x27;</span></span><br><span class="line">         <span class="string">&#x27; (Grade == &quot;Senior&quot;)&amp;&#x27;</span></span><br><span class="line">         <span class="string">&#x27; (Weight &gt; 70))|&#x27;</span></span><br><span class="line">         <span class="string">&#x27;((School == &quot;Peking University&quot;)&amp;&#x27;</span></span><br><span class="line">         <span class="string">&#x27; (Grade != &quot;Senior&quot;)&amp;&#x27;</span></span><br><span class="line">         <span class="string">&#x27; (Weight &gt; 80))&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="随机抽样"><a href="#随机抽样" class="headerlink" title="随机抽样"></a>随机抽样</h2><p>如果把 DataFrame 的每一行看作一个样本，或把每一列看作一个特征，再把整个 DataFrame 看作总体，想要对样本或特征进行随机抽样就可以用 sample 函数。有时在拿到大型数据集后，想要对统计特征进行计算来了解数据的大致分布，但是这很费时间。同时，由于许多统计特征在等概率不放回的简单随机抽样条件下，是总体统计特征的无偏估计，比如样本均值和总体均值，那么就可以先从整张表中抽出一部分来做近似估计。</p>
+<p>sample 函数中的主要参数为 <strong>n, axis, frac, replace, weights</strong> ，前三个分别是指<strong>抽样数量、抽样的方向</strong>（0 为行、1 为列）和<strong>抽样比例</strong>（0.3 则为从总体中抽出 30% 的样本）。replace 和 weights 分别是指<strong>是否放回</strong>和<strong>每个样本的抽样相对概率</strong>，当 replace &#x3D; True 则表示有放回抽样。</p>
+<h1 id="多级索引"><a href="#多级索引" class="headerlink" title="多级索引"></a>多级索引</h1><h3 id="1-多级索引及其表的结构"><a href="#1-多级索引及其表的结构" class="headerlink" title="1. 多级索引及其表的结构"></a>1. 多级索引及其表的结构</h3><h3 id="2-多级索引中的loc索引器"><a href="#2-多级索引中的loc索引器" class="headerlink" title="2. 多级索引中的loc索引器"></a>2. 多级索引中的loc索引器</h3><h3 id="3-IndexSlice对象"><a href="#3-IndexSlice对象" class="headerlink" title="3. IndexSlice对象"></a>3. IndexSlice对象</h3><h3 id="4-多级索引的构造"><a href="#4-多级索引的构造" class="headerlink" title="4. 多级索引的构造"></a>4. 多级索引的构造</h3></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">WBYZ</div><div class="author-info__description">True beauty lies in the cracks of imperfection.</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/11/26/%E5%A4%87%E8%80%83%E5%89%8D%E7%9A%84%E5%B0%8F%E5%90%90%E6%A7%BD/" title="无题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/11/26/%E5%A4%87%E8%80%83%E5%89%8D%E7%9A%84%E5%B0%8F%E5%90%90%E6%A7%BD/" title="无题">无题</a><time datetime="2022-11-26T09:10:27.562Z" title="发表于 2022-11-26 17:10:27">2022-11-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/20/%E9%9D%9E%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E7%90%86%E8%AE%BA/" title="无题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/11/20/%E9%9D%9E%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E7%90%86%E8%AE%BA/" title="无题">无题</a><time datetime="2022-11-20T08:46:03.067Z" title="发表于 2022-11-20 16:46:03">2022-11-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/14/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2022/09/14/hello-world/" title="Hello World">Hello World</a><time datetime="2022-09-14T11:03:00.627Z" title="发表于 2022-09-14 19:03:00">2022-09-14</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/11/"><span class="card-archive-list-date">十一月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">3</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-11-26T12:00:58.412Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By WBYZ</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
